@@ -16,6 +16,7 @@ public class EnterOfficeScene : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+		//SceneManager.LoadScene ("Introduction");
 		Application.LoadLevel ("Introduction");
 	}
 }
