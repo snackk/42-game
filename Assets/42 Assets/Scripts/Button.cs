@@ -26,9 +26,9 @@ public class Button : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 
-		if (Input.anyKey) {
+		/*if (Input.anyKey) {
 			Interact ();
-		}
+		}*/
 
 		lock (lockScreenRenderer) {
 			if (reEnableScreenRenderer) {
@@ -55,7 +55,7 @@ public class Button : MonoBehaviour {
 				isInteractable = false;
 				timer = 0;
 				if (timesCalled++ >= 7) {
-					//TODO
+					//TODO: change backgrounds and desk for a while. Stop screenrender permanently.
 				} else {
 					Debug.Log (timesCalled);
 					screenRenderer.enabled = false;
