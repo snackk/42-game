@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         _playerRB.velocity = new Vector2(move*_maxSpeed, _playerRB.velocity.y);
         
         //Adds speed to animator, animator then chooses the animation
-        _playerAnim.SetFloat("speed", Mathf.Abs(move));
+//        _playerAnim.SetFloat("speed", Mathf.Abs(move));				//NEVES TO DIOGO: This was printing that "speed" does not exist.
 
         if (move > 0 && !_playerFaceRight)
             flipSide();
