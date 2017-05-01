@@ -308,7 +308,7 @@ SpriteRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 724995527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1
@@ -517,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19562a0d1f2acb4d83bce3118e2d856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timesBeforeLightsOff: 3
 --- !u!1 &1522954808
 GameObject:
   m_ObjectHideFlags: 0

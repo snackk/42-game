@@ -15,7 +15,7 @@ public class Button : MonoBehaviour {
 	private float timer = 0.0f;
 
 	private object lockIsInteractable = new object();
-	private bool isInteractable = true;
+	private bool isInteractable = false;
 
 	private object lockScreenRenderer = new object();
 	private bool reEnableScreenRenderer = false;
@@ -35,7 +35,7 @@ public class Button : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 
-		if (Input.anyKey) {
+		if (Input.anyKeyDown) {
 			Interact ();
 		}
 
@@ -49,7 +49,11 @@ public class Button : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+		isInteractable = true;
 		Debug.Log ("Object entered");
+		if (timesCalled == 0) {
+			screenRenderer.enabled = true;
+		}
 	}
 
 	void OnTriggerExit2D (Collider2D other)
@@ -65,6 +69,7 @@ public class Button : MonoBehaviour {
 			}));
 			oThread.Start ();*/
 		}
+		isInteractable = false;
 	}
 
 	void SwitchLights(bool state){
