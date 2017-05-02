@@ -4,18 +4,25 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
-    [SerializeField]
+    
     public float _maxSpeed;
     public float _life;
     public float _playerJumpForce;
     public bool _isDoubleJumpAble;
     public bool _canMoveFreely;
 
+    [SerializeField]
+    public bool _isBlock = false;
+
     public LayerMask _whatIsGround;
 
+    [SerializeField]
     private bool _playerFaceRight = true;
+    [SerializeField]
     private bool _playerJump = false;
+    [SerializeField]
     private bool _isPlayerGrounded = false;
+    [SerializeField]
     [Range(0, 1)] private int _amountJump = 0;
 
     private Transform _playerCeilingCheck;
@@ -25,6 +32,16 @@ public class PlayerController : MonoBehaviour {
     private Animator _playerAnim;
 
     const float _groundedRadius = 1.3f;
+
+    public Rigidbody2D getPlayerRB
+    {
+        get { return _playerRB; }
+    }
+
+    public Animator getPlayerAnim
+    {
+        get { return _playerAnim; }
+    }
 
     // Use this for initialization
     void Start () {
@@ -47,7 +64,9 @@ public class PlayerController : MonoBehaviour {
     // FixedUpdate is more acurate than Update 
     void FixedUpdate () {
         checkGroundColision();
-        movePlayer();
+        if (!_isBlock) {
+            movePlayer();
+        } else _playerAnim.SetFloat("speed", 0);
     }
 
     private void checkGroundColision()

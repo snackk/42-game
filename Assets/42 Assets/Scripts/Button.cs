@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class Button : MonoBehaviour {
 
 	[SerializeField]
@@ -20,10 +21,15 @@ public class Button : MonoBehaviour {
 	private object lockScreenRenderer = new object();
 	private bool reEnableScreenRenderer = false;
 	private bool lightsState = true;
-		
-	// Use this for initialization
-	void Start () {
-		screen = this.gameObject.transform.GetChild (0).gameObject;
+
+    //DIOGOS
+    private PlayerController _player;
+
+    // Use this for initialization
+    void Start () {
+        _player = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        screen = this.gameObject.transform.GetChild (0).gameObject;
 		screenRenderer = screen.GetComponent<Renderer> ();
 		officeON = GameObject.Find ("Office_ON").GetComponent<Renderer> ();
 		deskOfficeON = GameObject.Find ("Office_ON/Office_ON_Desk").GetComponent<Renderer> ();
@@ -49,12 +55,18 @@ public class Button : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		isInteractable = true;
+        isInteractable = true;
 		Debug.Log ("Object entered");
 		if (timesCalled == 0) {
 			screenRenderer.enabled = true;
 		}
-	}
+
+        if (other.gameObject.name.Equals("Player"))
+        {
+            _player._isBlock = true;
+            Interact();
+        }
+    }
 
 	void OnTriggerExit2D (Collider2D other)
 	{
@@ -90,8 +102,11 @@ public class Button : MonoBehaviour {
 					screenRenderer.enabled = false;
 					SwitchLights (false);
 					lightsState = false;
-					//TODO: Change camera to follow the player.
-				} else {
+                    //TODO: Change camera to follow the player.
+                    _player._isBlock = false;
+                    _player._canMoveFreely = true;
+                    //TODO
+                } else {
 					Debug.Log (timesCalled);
 					screenRenderer.enabled = false;
 
