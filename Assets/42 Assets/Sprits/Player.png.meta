@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ea2f3403de80aaf41a73d4f2c55791f5
-timeCreated: 1493338923
+timeCreated: 1493721366
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -20,8 +20,6 @@ TextureImporter:
     21300026: Player_13
     21300028: Player_14
     21300030: Player_15
-    21300032: Player_16
-    21300034: Player_17
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -91,10 +89,10 @@ TextureImporter:
       name: Player_0
       rect:
         serializedVersion: 2
-        x: 237
-        y: 521
-        width: 72
-        height: 247
+        x: 0
+        y: 512
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,10 +102,10 @@ TextureImporter:
       name: Player_1
       rect:
         serializedVersion: 2
-        x: 323
-        y: 521
-        width: 72
-        height: 247
+        x: 237
+        y: 512
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,10 +115,10 @@ TextureImporter:
       name: Player_2
       rect:
         serializedVersion: 2
-        x: 409
-        y: 521
-        width: 64
-        height: 242
+        x: 474
+        y: 512
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,10 +128,10 @@ TextureImporter:
       name: Player_3
       rect:
         serializedVersion: 2
-        x: 483
-        y: 521
-        width: 64
-        height: 243
+        x: 711
+        y: 512
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,10 +141,10 @@ TextureImporter:
       name: Player_4
       rect:
         serializedVersion: 2
-        x: 124
-        y: 265
-        width: 68
-        height: 246
+        x: 0
+        y: 256
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +154,23 @@ TextureImporter:
       name: Player_5
       rect:
         serializedVersion: 2
-        x: 195
-        y: 266
-        width: 100
-        height: 245
+        x: 237
+        y: 256
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_6
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 256
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,12 +180,12 @@ TextureImporter:
       name: Player_7
       rect:
         serializedVersion: 2
-        x: 308
-        y: 265
-        width: 66
-        height: 246
+        x: 711
+        y: 256
+        width: 237
+        height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -182,10 +193,10 @@ TextureImporter:
       name: Player_8
       rect:
         serializedVersion: 2
-        x: 382
-        y: 265
-        width: 90
-        height: 246
+        x: 948
+        y: 256
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +206,10 @@ TextureImporter:
       name: Player_9
       rect:
         serializedVersion: 2
-        x: 474
-        y: 268
-        width: 94
-        height: 243
+        x: 1185
+        y: 256
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,10 +219,10 @@ TextureImporter:
       name: Player_10
       rect:
         serializedVersion: 2
-        x: 558
-        y: 267
-        width: 90
-        height: 244
+        x: 0
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,10 +232,10 @@ TextureImporter:
       name: Player_11
       rect:
         serializedVersion: 2
-        x: 124
-        y: 13
-        width: 90
-        height: 243
+        x: 237
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +245,10 @@ TextureImporter:
       name: Player_12
       rect:
         serializedVersion: 2
-        x: 203
-        y: 13
-        width: 94
-        height: 243
+        x: 474
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +258,10 @@ TextureImporter:
       name: Player_13
       rect:
         serializedVersion: 2
-        x: 299
-        y: 10
-        width: 90
-        height: 246
+        x: 711
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,36 +271,23 @@ TextureImporter:
       name: Player_14
       rect:
         serializedVersion: 2
-        x: 397
-        y: 10
-        width: 66
-        height: 246
+        x: 948
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_16
+      name: Player_15
       rect:
         serializedVersion: 2
-        x: 476
-        y: 11
-        width: 100
-        height: 245
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player_17
-      rect:
-        serializedVersion: 2
-        x: 579
-        y: 10
-        width: 68
-        height: 246
+        x: 1185
+        y: 0
+        width: 237
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

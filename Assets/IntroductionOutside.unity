@@ -195,7 +195,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1458308964
 GameObject:
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530425930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a054517195fcbe43957feddc4a5c3a4, type: 3}
+  m_Script: {fileID: 11500000, guid: c438c7b1e43c6334c80c4f7d87e06ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1530425934
