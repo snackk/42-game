@@ -55,17 +55,18 @@ public class Button : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-        isInteractable = true;
+		lock(lockIsInteractable)
+			isInteractable = timesCalled < _timesBeforeLightsOff;
+		
 		Debug.Log ("Object entered");
 		if (timesCalled == 0) {
 			screenRenderer.enabled = true;
+			if (other.gameObject.name.Equals("Player"))
+			{
+				_player._isBlock = true;
+				//Interact();
+			}
 		}
-
-        if (other.gameObject.name.Equals("Player"))
-        {
-            _player._isBlock = true;
-            Interact();
-        }
     }
 
 	void OnTriggerExit2D (Collider2D other)
