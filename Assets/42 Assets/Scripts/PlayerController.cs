@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
         _playerJump = false;
     }
 
-    private void flipSide()
+    public void flipSide()
     {
         _playerFaceRight = !_playerFaceRight;
         Vector3 scaleNeg = transform.localScale;

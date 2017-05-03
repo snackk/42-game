@@ -64,7 +64,6 @@ public class Button : MonoBehaviour {
 			if (other.gameObject.name.Equals("Player"))
 			{
 				_player._isBlock = true;
-				//Interact();
 			}
 		}
     }
@@ -103,10 +102,12 @@ public class Button : MonoBehaviour {
 					screenRenderer.enabled = false;
 					SwitchLights (false);
 					lightsState = false;
+
                     //TODO: Change camera to follow the player.
                     _player._isBlock = false;
                     _player._canMoveFreely = true;
                     //TODO
+
                 } else {
 					Debug.Log (timesCalled);
 					screenRenderer.enabled = false;
