@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 484ce3c28bac20e419b5e40432345ca7
-timeCreated: 1493814178
+guid: 624d2bbc579119d4e856e9c493a577a2
+timeCreated: 1493817501
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Cat 1_0
-    21300002: Cat 1_1
+    21300000: Cat_0
+    21300002: Cat_1
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,26 +72,26 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cat 1_0
+      name: Cat_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 231
-        width: 90
-        height: 88
+        y: 0
+        width: 65
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Cat 1_1
+      name: Cat_1
       rect:
         serializedVersion: 2
-        x: 90
-        y: 231
-        width: 90
-        height: 88
+        x: 65
+        y: 0
+        width: 65
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

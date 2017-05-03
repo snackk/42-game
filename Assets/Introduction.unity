@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 336813564}
   - component: {fileID: 336813563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_ON_Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 484390331}
   - component: {fileID: 484390330}
   - component: {fileID: 484390333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_ON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,6 +406,21 @@ Prefab:
         type: 2}
       propertyPath: _maxSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: _canMoveFreely
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: _isBlock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: _whatIsGround.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436050e752c15244daf69b88649d8754, type: 2}

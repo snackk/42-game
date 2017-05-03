@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(PlayerController))]
-public class Button : MonoBehaviour {
+public class Button : MonoBehaviour, IInteractable {
 
 	[SerializeField]
 	private int _timesBeforeLightsOff = 2;
@@ -40,12 +41,23 @@ public class Button : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
-
-		if (Input.anyKeyDown) {
+        
+        //TODO: change this to a separate component to handle "ALL BUTTONS".
+        if (CrossPlatformInputManager.GetButtonDown("Jump") || Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        {
 			Interact ();
 		}
+        else
+        {
+            if (timesCalled > 0)
+            {
+                var ready = timesCalled >= _timesBeforeLightsOff;
+                _player._isBlock = !ready;
+                _player._canMoveFreely = ready;
+            }
+        }
 
-		lock (lockScreenRenderer) {
+        lock (lockScreenRenderer) {
 			if (reEnableScreenRenderer) {
 				reEnableScreenRenderer = false;
 				screenRenderer.enabled = true;
@@ -91,7 +103,7 @@ public class Button : MonoBehaviour {
 		deskOfficeOFF.enabled = !state;
 	}
 
-	void Interact()
+	public int Interact()
 	{			
 		lock (lockIsInteractable) {
 			if (isInteractable) {
@@ -104,8 +116,8 @@ public class Button : MonoBehaviour {
 					lightsState = false;
 
                     //TODO: Change camera to follow the player.
-                    _player._isBlock = false;
-                    _player._canMoveFreely = true;
+                    //_player._isBlock = true;
+                    //_player._canMoveFreely = false;
                     //TODO
 
                 } else {
@@ -127,5 +139,6 @@ public class Button : MonoBehaviour {
 				}
 			}
 		}
+        return 0;
 	}
 }

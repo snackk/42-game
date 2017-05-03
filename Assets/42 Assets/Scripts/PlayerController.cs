@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D _playerRB;
     private Animator _playerAnim;
 
-    const float _groundedRadius = 1.3f;
+    const float _groundedRadius = .2f;
 
     public Rigidbody2D getPlayerRB
     {
@@ -63,10 +63,13 @@ public class PlayerController : MonoBehaviour {
 
     // FixedUpdate is more acurate than Update 
     void FixedUpdate () {
-        checkGroundColision();
-        if (!_isBlock) {
+        
+
+        if (!_isBlock) 
             movePlayer();
-        } else _playerAnim.SetFloat("speed", 0);
+        else _playerAnim.SetFloat("speed", 0);
+
+        checkGroundColision();
     }
 
     private void checkGroundColision()
@@ -91,7 +94,7 @@ public class PlayerController : MonoBehaviour {
             if(Mathf.Abs(move) == 0)
                 move = Input.GetAxis("Vertical");
             move = Mathf.Abs(move);
-        }
+        } else handleJump();
 
         //Set velocity by the movement
         _playerRB.velocity = new Vector2(move * _maxSpeed, _playerRB.velocity.y);
@@ -102,14 +105,11 @@ public class PlayerController : MonoBehaviour {
         if (move > 0 && !_playerFaceRight)
             flipSide();
         else if (move < 0 && _playerFaceRight)
-                flipSide();
-
-        if(_canMoveFreely)
-            handleJump();
+                flipSide(); 
     }
 
     private void handleJump() {
-        if (_playerJump && _isPlayerGrounded)
+        /*if (_playerJump && _isPlayerGrounded)
         {
             _playerRB.AddForce(new Vector2(0f, _playerJumpForce));
             _playerAnim.SetBool("jump", true);
@@ -128,6 +128,14 @@ public class PlayerController : MonoBehaviour {
             else _playerAnim.SetBool("jump", false);
         }
 
+        _playerJump = false;*/
+        if (_playerJump)
+        {
+            //_playerRB.AddForce(new Vector2(0f, _playerJumpForce));
+            _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+            _playerAnim.SetBool("jump", true);
+            _isPlayerGrounded = false;
+        } else _playerAnim.SetBool("jump", false);
         _playerJump = false;
     }
 
