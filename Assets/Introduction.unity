@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 724995530}
   - component: {fileID: 724995529}
   - component: {fileID: 724995528}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ScreenPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,6 +422,11 @@ Prefab:
       propertyPath: _whatIsGround.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: _whatIsInteractable.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436050e752c15244daf69b88649d8754, type: 2}
   m_IsPrefabParent: 0
@@ -436,9 +441,9 @@ GameObject:
   - component: {fileID: 1153392383}
   - component: {fileID: 1153392385}
   - component: {fileID: 1153392386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
