@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887806948476498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.457, y: -1.799, z: 0}
+  m_LocalPosition: {x: -2.442, y: -0.532, z: 0}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.5}
   m_Children:
   - {fileID: 4621496136759500}
@@ -191,20 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ee0c80f0f14994eb3804ae4a547600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 2
-  _life: 100
-  _playerJumpForce: 4
-  _isDoubleJumpAble: 0
   _canMoveFreely: 0
   _isBlock: 0
-  _playerFaceRight: 1
-  _playerJump: 0
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   _whatIsInteractable:
     serializedVersion: 2
     m_Bits: 512
+  _playerTheGoodSprites: []
+  _playerTheBadSprites: []
 --- !u!212 &212397953069536066
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -237,7 +233,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: ea2f3403de80aaf41a73d4f2c55791f5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

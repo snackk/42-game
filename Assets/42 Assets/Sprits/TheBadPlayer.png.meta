@@ -1,25 +1,26 @@
 fileFormatVersion: 2
-guid: ea2f3403de80aaf41a73d4f2c55791f5
-timeCreated: 1493721366
+guid: b16a012de5436e241a68c44015c85e88
+timeCreated: 1495749771
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Player_0
-    21300002: Player_1
-    21300004: Player_2
-    21300006: Player_3
-    21300008: Player_4
-    21300010: Player_5
-    21300012: Player_6
-    21300014: Player_7
-    21300016: Player_8
-    21300018: Player_9
-    21300020: Player_10
-    21300022: Player_11
-    21300024: Player_12
-    21300026: Player_13
-    21300028: Player_14
-    21300030: Player_15
+    21300000: TheBadPlayer_0
+    21300002: TheBadPlayer_1
+    21300004: TheBadPlayer_2
+    21300006: TheBadPlayer_3
+    21300008: TheBadPlayer_4
+    21300010: TheBadPlayer_5
+    21300012: TheBadPlayer_6
+    21300014: TheBadPlayer_7
+    21300016: TheBadPlayer_8
+    21300018: TheBadPlayer_9
+    21300020: TheBadPlayer_10
+    21300022: TheBadPlayer_11
+    21300024: TheBadPlayer_12
+    21300026: TheBadPlayer_13
+    21300028: TheBadPlayer_14
+    21300030: TheBadPlayer_15
+    21300032: TheBadPlayer_16
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -86,7 +87,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_0
+      name: TheBadPlayer_0
       rect:
         serializedVersion: 2
         x: 0
@@ -99,7 +100,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_1
+      name: TheBadPlayer_1
       rect:
         serializedVersion: 2
         x: 237
@@ -112,7 +113,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_2
+      name: TheBadPlayer_2
       rect:
         serializedVersion: 2
         x: 474
@@ -125,7 +126,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_3
+      name: TheBadPlayer_3
       rect:
         serializedVersion: 2
         x: 711
@@ -138,7 +139,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_4
+      name: TheBadPlayer_4
       rect:
         serializedVersion: 2
         x: 0
@@ -151,7 +152,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_5
+      name: TheBadPlayer_5
       rect:
         serializedVersion: 2
         x: 237
@@ -164,7 +165,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_6
+      name: TheBadPlayer_6
       rect:
         serializedVersion: 2
         x: 474
@@ -177,7 +178,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_7
+      name: TheBadPlayer_7
       rect:
         serializedVersion: 2
         x: 711
@@ -190,7 +191,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_8
+      name: TheBadPlayer_8
       rect:
         serializedVersion: 2
         x: 948
@@ -203,7 +204,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_9
+      name: TheBadPlayer_9
       rect:
         serializedVersion: 2
         x: 1185
@@ -216,7 +217,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_10
+      name: TheBadPlayer_10
       rect:
         serializedVersion: 2
         x: 0
@@ -229,7 +230,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_11
+      name: TheBadPlayer_11
       rect:
         serializedVersion: 2
         x: 237
@@ -242,7 +243,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_12
+      name: TheBadPlayer_12
       rect:
         serializedVersion: 2
         x: 474
@@ -255,7 +256,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_13
+      name: TheBadPlayer_13
       rect:
         serializedVersion: 2
         x: 711
@@ -268,7 +269,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_14
+      name: TheBadPlayer_14
       rect:
         serializedVersion: 2
         x: 948
@@ -281,7 +282,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Player_15
+      name: TheBadPlayer_15
       rect:
         serializedVersion: 2
         x: 1185

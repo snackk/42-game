@@ -20,19 +20,22 @@ namespace UnityStandardAssets._2D
         // Use this for initialization
         private void Start()
         {
-            //m_LastTargetPosition = target.position;
-            //m_OffsetZ = (transform.position - target.position).z;
-            //transform.parent = null;
-
-            //_playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
+            _playerAnimator = GameObject.Find("Player").GetComponent<Animator>();
+            if (!_playerAnimator.GetBool("MachineSide"))
+            {
+                m_LastTargetPosition = target.position;
+                m_OffsetZ = (transform.position - target.position).z;
+                transform.parent = null;
+            }
         }
 
 
         // Update is called once per frame
         private void Update()
         {
-            //if (!_playerAnimator.GetBool("MachineSide"))
-              //  CameraFollowPlayer();
+            _playerAnimator = GameObject.Find("Player").GetComponent<Animator>();
+            if (!_playerAnimator.GetBool("MachineSide"))
+                CameraFollowPlayer();
         }
 
         private void CameraFollowPlayer() {
@@ -41,13 +44,14 @@ namespace UnityStandardAssets._2D
 
             bool updateLookAheadTarget = Mathf.Abs(xMoveDelta) > lookAheadMoveThreshold;
 
+
             if (updateLookAheadTarget)
             {
-                m_LookAheadPos = lookAheadFactor * Vector3.right * Mathf.Sign(xMoveDelta);
+                m_LookAheadPos = lookAheadFactor * new Vector3(1, target.position.y + 1.2f, 0) * Mathf.Sign(xMoveDelta);
             }
             else
             {
-                m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, Vector3.zero, Time.deltaTime * lookAheadReturnSpeed);
+                m_LookAheadPos = Vector3.MoveTowards(m_LookAheadPos, new Vector3(0,target.position.y + 1.2f,0), Time.deltaTime * lookAheadReturnSpeed);
             }
 
             Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward * m_OffsetZ;

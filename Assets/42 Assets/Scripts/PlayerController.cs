@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     
     //Player state variables
-    private float _maxSpeed = 2;
+    private float _maxSpeed = 1.5f;
     private float _life = 100;
-    private float _playerJumpForce = 2;
+    private float _playerJumpForce = 3;
     private bool _isDoubleJumpAble = false;
 
     public bool _canMoveFreely = false;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     private int _amountJump = 0;
 
     //Layers to check collisions
-    private const float _groundedRadius = .015f;
+    private const float _groundedRadius = .02f;
 
     public LayerMask _whatIsGround;
     public LayerMask _whatIsInteractable;
@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour {
     //Interactions
     private List<IInteractable> _interactables = new List<IInteractable>();
     private PlayerMovement _playerMovement;
+
+    //Sprited to be loaded on runtime
+    public Sprite[] _playerTheGoodSprites;
+    public Sprite[] _playerTheBadSprites;
 
 
     public Rigidbody2D getPlayerRB
@@ -55,6 +59,16 @@ public class PlayerController : MonoBehaviour {
         _playerAnim = GetComponent<Animator>();
 
         _playerMovement = PlayerMovement.getInstance();
+
+        //Load dynamically the Sprites
+        SpriteRenderer _playerSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        _playerTheGoodSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
+        _playerTheBadSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
+        Debug.Log(_playerTheBadSprites.Length);
+        if (_playerAnim.GetBool("MachineSide"))
+            _playerSpriteRenderer.sprite = _playerTheBadSprites[0];
+        else _playerSpriteRenderer.sprite = _playerTheGoodSprites[0];
     }
 
     private void Update()
@@ -106,7 +120,7 @@ public class PlayerController : MonoBehaviour {
                     hMove = _playerMovement.verticalMove;
                 hMove = Mathf.Abs(hMove);
             }
-            else handleJump();
+            else handleJump((hMove != 0 && vMove != 0));
 
             _playerRB.velocity = new Vector2(hMove * _maxSpeed, _playerRB.velocity.y);
             _playerAnim.SetFloat("speed", Mathf.Abs(hMove));
@@ -118,14 +132,15 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void handleJump()
+    private void handleJump(bool isMoving)
     {
         if (_playerJump)
         {
             if (_amountJump == 0)
             {
                 _playerRB.velocity = new Vector2(0f, _playerJumpForce);
-                _playerAnim.SetBool("jump", true);
+                if(isMoving)
+                    _playerAnim.SetBool("jump", true);
                 _isPlayerGrounded = false;
 
                 _amountJump++;
@@ -135,8 +150,11 @@ public class PlayerController : MonoBehaviour {
                 if (_amountJump == 1 && _isDoubleJumpAble)
                 {
                     _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+                        if (isMoving)
+                            _playerAnim.SetBool("jump", true);
+                        _isPlayerGrounded = false;
 
-                    _amountJump++;
+                        _amountJump++;
                 }
             }
         } else _playerAnim.SetBool("jump", false);
