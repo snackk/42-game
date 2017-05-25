@@ -4,24 +4,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     
     //Player state variables
-    public float _maxSpeed;
-    public float _life;
-    public float _playerJumpForce;
-    public bool _isDoubleJumpAble = false;
+    private float _maxSpeed = 2;
+    private float _life = 100;
+    private float _playerJumpForce = 2;
+    private bool _isDoubleJumpAble = false;
+
     public bool _canMoveFreely = false;
     public bool _isBlock = false;
 
-    [SerializeField]
     private bool _playerFaceRight = true;
-    [SerializeField]
     private bool _playerJump = false;
 
     private bool _isPlayerGrounded = true;
-   
     private int _amountJump = 0;
 
     //Layers to check collisions
-    [SerializeField]
     private const float _groundedRadius = .015f;
 
     public LayerMask _whatIsGround;
@@ -62,17 +59,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
-        List<IInteractable> toDelete = new List<IInteractable>();
-        foreach (IInteractable i in _interactables)
-        {
-            int result = i.Interact(this);
-            if (result == 1)
-                toDelete.Add(i);
-        }
-
-        foreach (IInteractable i in toDelete) { //If interaction returned 1, then i wont need it anymore
-            _interactables.Remove(i);
-        }        
+     
     }
 
     // FixedUpdate is more acurate than Update 
@@ -80,44 +67,59 @@ public class PlayerController : MonoBehaviour {
     {
         checkGroundColision();
         checkForInteraction();
-
-        if (!_isBlock)
-            movePlayer();
-        else {
-            if (_playerFaceRight)
-                flipSide();
-            _playerAnim.SetFloat("speed", 0);
-        }
+        
+        movePlayer();
     }
 
     private void movePlayer()
     {
-        float move = _playerMovement.horizontalMove;
+        float hMove = _playerMovement.horizontalMove;
+        float vMove = _playerMovement.verticalMove;
+        if (!_playerJump)
+            _playerJump = _playerMovement.wannaJump;
 
-        if (!_canMoveFreely)
+        if (_isBlock)
         {
-            if (Mathf.Abs(move) == 0)
-                move = _playerMovement.verticalMove;
-            move = Mathf.Abs(move);
-        } else handleJump();
+            if (_playerFaceRight)
+                flipSide();
+            _playerAnim.SetFloat("speed", 0);
+        }
 
-        _playerRB.velocity = new Vector2(move * _maxSpeed, _playerRB.velocity.y);
-        _playerAnim.SetFloat("speed", Mathf.Abs(move));
+        if (_interactables.Count > 0)
+        {
+            if (hMove != 0 || vMove != 0 || _playerJump)
+            {
+                int result = 0;
+                foreach (IInteractable i in _interactables)
+                {
+                    result = i.Interact();
+                }
+                if (result == 1)
+                    _interactables = new List<IInteractable>();
+            }
+        }
+        else
+        {
+            if (!_canMoveFreely)
+            {
+                if (Mathf.Abs(hMove) == 0)
+                    hMove = _playerMovement.verticalMove;
+                hMove = Mathf.Abs(hMove);
+            }
+            else handleJump();
 
-        if (move > 0 && !_playerFaceRight)
-            flipSide();
-        else if (move < 0 && _playerFaceRight)
-                flipSide(); 
+            _playerRB.velocity = new Vector2(hMove * _maxSpeed, _playerRB.velocity.y);
+            _playerAnim.SetFloat("speed", Mathf.Abs(hMove));
+
+            if (hMove > 0 && !_playerFaceRight)
+                flipSide();
+            else if (hMove < 0 && _playerFaceRight)
+                flipSide();
+        }
     }
 
     private void handleJump()
     {
-        if (!_playerJump)
-        {
-            // Read the jump input in Update so button presses aren't missed.
-            _playerJump = _playerMovement.wannaJump;
-        }
-
         if (_playerJump)
         {
             if (_amountJump == 0)
@@ -167,7 +169,7 @@ public class PlayerController : MonoBehaviour {
 
     private void checkForInteraction()
     {
-        if (_interactables.Count == 0)
+        if (_interactables.Count == 0 && _isBlock)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
             for (int i = 0; i < colliders.Length; i++)

@@ -1,5 +1,8 @@
-﻿using System.Threading;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(PlayerController))]
 public class Button : MonoBehaviour, IInteractable
@@ -22,49 +25,40 @@ public class Button : MonoBehaviour, IInteractable
     private bool lightsState = true;
 
     //DIOGOS
-    private PlayerController _player = null;
-    private PlayerMovement _playerMovement;
+    private PlayerController _player;
 
     // Use this for initialization
     void Start()
     {
+        _player = GameObject.Find("Player").GetComponent<PlayerController>();
+
         screen = this.gameObject.transform.GetChild(0).gameObject;
         screenRenderer = screen.GetComponent<Renderer>();
         officeON = GameObject.Find("Office_ON").GetComponent<Renderer>();
         deskOfficeON = GameObject.Find("Office_ON/Office_ON_Desk").GetComponent<Renderer>();
         deskOfficeOFF = GameObject.Find("Office_OFF").GetComponent<Renderer>();
         officeOFF = GameObject.Find("Office_OFF/Office_off_desk").GetComponent<Renderer>();
-
-        _playerMovement = PlayerMovement.getInstance();
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        if (_player != null)
-        {
-            if (_playerMovement.wannaJump || _playerMovement.verticalMove != 0 || _playerMovement.horizontalMove != 0)
-            {
-                Interact(_player);
-            }
-            else
-            {
-                if (timesCalled > 0)
-                {
-                    var ready = timesCalled >= _timesBeforeLightsOff;
-                    _player._isBlock = !ready;
-                    _player._canMoveFreely = ready;
-                }
-            }
 
-            lock (lockScreenRenderer)
+        if (timesCalled > 0)
+        {
+            var ready = timesCalled >= _timesBeforeLightsOff;
+            _player._isBlock = !ready;
+            _player._canMoveFreely = ready;
+        }
+
+
+        lock (lockScreenRenderer)
+        {
+            if (reEnableScreenRenderer)
             {
-                if (reEnableScreenRenderer)
-                {
-                    reEnableScreenRenderer = false;
-                    screenRenderer.enabled = true;
-                }
+                reEnableScreenRenderer = false;
+                screenRenderer.enabled = true;
             }
         }
     }
@@ -78,6 +72,10 @@ public class Button : MonoBehaviour, IInteractable
         if (timesCalled == 0)
         {
             screenRenderer.enabled = true;
+            if (other.gameObject.name.Equals("Player"))
+            {
+                _player._isBlock = true;
+            }
         }
     }
 
@@ -106,11 +104,9 @@ public class Button : MonoBehaviour, IInteractable
         deskOfficeOFF.enabled = !state;
     }
 
-    public int Interact(PlayerController player)
+    public int Interact()
     {
-        this._player = player;
-        _player._isBlock = true;
-
+        bool is1 = false;
         lock (lockIsInteractable)
         {
             if (isInteractable)
@@ -124,10 +120,10 @@ public class Button : MonoBehaviour, IInteractable
                     SwitchLights(false);
                     lightsState = false;
 
-                    //TODO: Change camera to follow the player.
-                    //_player._isBlock = true;
-                    //_player._canMoveFreely = false;
-                    //TODO
+                    _player._isBlock = false;
+                    _player._canMoveFreely = true;
+                    is1 = true;
+
 
                 }
                 else
@@ -152,6 +148,6 @@ public class Button : MonoBehaviour, IInteractable
                 }
             }
         }
-        return 0;
+        return (is1 ? 1 : 0);
     }
 }
