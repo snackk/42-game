@@ -197,13 +197,14 @@ MonoBehaviour:
   _isDoubleJumpAble: 0
   _canMoveFreely: 0
   _isBlock: 0
+  _playerFaceRight: 1
+  _playerJump: 0
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
-  _playerFaceRight: 1
-  _playerJump: 0
-  _isPlayerGrounded: 0
-  _amountJump: 0
+  _whatIsInteractable:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!212 &212397953069536066
 SpriteRenderer:
   m_ObjectHideFlags: 1

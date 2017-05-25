@@ -1,38 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
     
+    //Player state variables
     public float _maxSpeed;
     public float _life;
     public float _playerJumpForce;
-    public bool _isDoubleJumpAble;
-    public bool _canMoveFreely;
-
-    [SerializeField]
+    public bool _isDoubleJumpAble = false;
+    public bool _canMoveFreely = false;
     public bool _isBlock = false;
-
-    public LayerMask _whatIsGround;
-    public LayerMask _whatIsInteractable;
 
     [SerializeField]
     private bool _playerFaceRight = true;
     [SerializeField]
     private bool _playerJump = false;
+
+    private bool _isPlayerGrounded = true;
+   
+    private int _amountJump = 0;
+
+    //Layers to check collisions
     [SerializeField]
-    private bool _isPlayerGrounded = false;
-    [SerializeField]
-    [Range(0, 1)] private int _amountJump = 0;
+    private const float _groundedRadius = .015f;
+
+    public LayerMask _whatIsGround;
+    public LayerMask _whatIsInteractable;
 
     private Transform _playerCeilingCheck;
     private Transform _playerGroundCheck;
 
+    //Player Animations
     private Rigidbody2D _playerRB;
     private Animator _playerAnim;
 
-    const float _groundedRadius = .2f;
+    //Interactions
+    private List<IInteractable> _interactables = new List<IInteractable>();
+    private PlayerMovement _playerMovement;
+
 
     public Rigidbody2D getPlayerRB
     {
@@ -44,13 +49,10 @@ public class PlayerController : MonoBehaviour {
         get { return _playerAnim; }
     }
 
-    private List<IInteractable> _interactables = new List<IInteractable>();
-    private PlayerMovement _playerMovement;
-
     // Use this for initialization
     void Start () {
         _playerCeilingCheck = transform.Find("CeilingCheck"); 
-         _playerGroundCheck = transform.Find("GroundCheck");
+        _playerGroundCheck = transform.Find("GroundCheck");
 
         _playerRB = GetComponent<Rigidbody2D>();
         _playerAnim = GetComponent<Animator>();
@@ -60,28 +62,92 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        List<IInteractable> toDelete = new List<IInteractable>();
         foreach (IInteractable i in _interactables)
         {
-            i.Interact(this);
+            int result = i.Interact(this);
+            if (result == 1)
+                toDelete.Add(i);
         }
-        //_interactables = new List<IInteractable>();
 
-        if (!_playerJump && !_isBlock)
+        foreach (IInteractable i in toDelete) { //If interaction returned 1, then i wont need it anymore
+            _interactables.Remove(i);
+        }        
+    }
+
+    // FixedUpdate is more acurate than Update 
+    void FixedUpdate ()
+    {
+        checkGroundColision();
+        checkForInteraction();
+
+        if (!_isBlock)
+            movePlayer();
+        else {
+            if (_playerFaceRight)
+                flipSide();
+            _playerAnim.SetFloat("speed", 0);
+        }
+    }
+
+    private void movePlayer()
+    {
+        float move = _playerMovement.horizontalMove;
+
+        if (!_canMoveFreely)
+        {
+            if (Mathf.Abs(move) == 0)
+                move = _playerMovement.verticalMove;
+            move = Mathf.Abs(move);
+        } else handleJump();
+
+        _playerRB.velocity = new Vector2(move * _maxSpeed, _playerRB.velocity.y);
+        _playerAnim.SetFloat("speed", Mathf.Abs(move));
+
+        if (move > 0 && !_playerFaceRight)
+            flipSide();
+        else if (move < 0 && _playerFaceRight)
+                flipSide(); 
+    }
+
+    private void handleJump()
+    {
+        if (!_playerJump)
         {
             // Read the jump input in Update so button presses aren't missed.
             _playerJump = _playerMovement.wannaJump;
         }
+
+        if (_playerJump)
+        {
+            if (_amountJump == 0)
+            {
+                _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+                _playerAnim.SetBool("jump", true);
+                _isPlayerGrounded = false;
+
+                _amountJump++;
+            }
+            else
+            {
+                if (_amountJump == 1 && _isDoubleJumpAble)
+                {
+                    _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+
+                    _amountJump++;
+                }
+            }
+        } else _playerAnim.SetBool("jump", false);
+
+        _playerJump = false;
     }
 
-    // FixedUpdate is more acurate than Update 
-    void FixedUpdate () {
-
-        if (!_isBlock) 
-            movePlayer();
-        else _playerAnim.SetFloat("speed", 0);
-
-        checkGroundColision();
-        checkForInteraction();
+    private void flipSide()
+    {
+        _playerFaceRight = !_playerFaceRight;
+        Vector3 scaleNeg = transform.localScale;
+        scaleNeg.x *= -1;
+        transform.localScale = scaleNeg;
     }
 
     private void checkGroundColision()
@@ -94,6 +160,7 @@ public class PlayerController : MonoBehaviour {
             {
                 _isPlayerGrounded = true;
                 _amountJump = 0;
+
             }
         }
     }
@@ -105,66 +172,11 @@ public class PlayerController : MonoBehaviour {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
             for (int i = 0; i < colliders.Length; i++)
             {
-                //MOVE THIS TO ELSEWHERE
                 if (colliders[i].gameObject.CompareTag("Interactable"))
                 {
-                    Debug.Log("cona");
                     _interactables.Add(colliders[i].GetComponent<IInteractable>());
                 }
             }
         }
-    }
-
-    private void movePlayer() {
-        float move = _playerMovement.horizontalMove;
-
-        if (!_canMoveFreely)
-        {
-            if (Mathf.Abs(move) == 0)
-                move = _playerMovement.verticalMove;
-            move = Mathf.Abs(move);
-        } else handleJump();
-
-        //Set velocity by the movement
-        _playerRB.velocity = new Vector2(move * _maxSpeed, _playerRB.velocity.y);
-
-        //Adds speed to animator, animator then chooses the animation
-        _playerAnim.SetFloat("speed", Mathf.Abs(move));
-
-        if (move > 0 && !_playerFaceRight)
-            flipSide();
-        else if (move < 0 && _playerFaceRight)
-                flipSide(); 
-    }
-
-    private void handleJump() {
-        if (_playerJump && _isPlayerGrounded)
-        {
-            _playerRB.velocity = new Vector2(0f, _playerJumpForce);
-            _playerAnim.SetBool("jump", true);
-            _isPlayerGrounded = false;
-        }
-        else
-        {
-            if (_playerJump && !_isPlayerGrounded)
-            {
-                if (_amountJump < 1 && _isDoubleJumpAble)
-                {
-                    _playerRB.velocity = new Vector2(0f, _playerJumpForce);
-                    _amountJump++;
-                }
-            }
-            else _playerAnim.SetBool("jump", false);
-        }
-
-        _playerJump = false;
-    }
-
-    public void flipSide()
-    {
-        _playerFaceRight = !_playerFaceRight;
-        Vector3 scaleNeg = transform.localScale;
-        scaleNeg.x *= -1;
-        transform.localScale = scaleNeg;
     }
 }

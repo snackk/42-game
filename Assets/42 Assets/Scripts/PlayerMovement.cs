@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private static PlayerMovement _instance;
 
-    public float horizontalMove { get
+    public float horizontalMove
+    {
+        get
         {
         return Input.GetAxis("Horizontal");
         }

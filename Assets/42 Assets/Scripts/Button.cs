@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(PlayerController))]
 public class Button : MonoBehaviour, IInteractable
