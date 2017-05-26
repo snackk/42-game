@@ -155,7 +155,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.37, y: 2.56}
-    newSize: {x: 2.36, y: 2.47}
+    newSize: {x: 2.37, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -199,8 +199,10 @@ MonoBehaviour:
   _whatIsInteractable:
     serializedVersion: 2
     m_Bits: 512
-  _playerTheGoodSprites: []
-  _playerTheBadSprites: []
+  _theGoodPlayerSprite: {fileID: 21300002, guid: 624d2bbc579119d4e856e9c493a577a2,
+    type: 3}
+  _theBadPlayerSprite: {fileID: 21300036, guid: d40c191aa46654db7a426d6a1fa3aa30,
+    type: 3}
 --- !u!212 &212397953069536066
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -233,11 +235,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b16a012de5436e241a68c44015c85e88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.36, y: 2.47}
+  m_Size: {x: 2.37, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0

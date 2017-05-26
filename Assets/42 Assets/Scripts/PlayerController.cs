@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
     
-    //Player state variables
-    private float _maxSpeed = 1.5f;
-    private float _life = 100;
-    private float _playerJumpForce = 3;
-    private bool _isDoubleJumpAble = false;
+    //Player state variables (Depends on the player side)
+    private float _maxSpeed;
+    private float _life;
+    private float _playerJumpForce;
+    private bool _isDoubleJumpAble;
 
+    //Changes from scene to scene
     public bool _canMoveFreely = false;
-    public bool _isBlock = false;
-
+    public bool _isBlock = false;   //To interact with player YOU MUST BLOCK HIM!
+    
+    //DO NOT TOUCH THESE
     private bool _playerFaceRight = true;
     private bool _playerJump = false;
 
@@ -33,12 +36,10 @@ public class PlayerController : MonoBehaviour {
 
     //Interactions
     private List<IInteractable> _interactables = new List<IInteractable>();
-    private PlayerMovement _playerMovement;
 
     //Sprited to be loaded on runtime
-    public Sprite[] _playerTheGoodSprites;
-    public Sprite[] _playerTheBadSprites;
-
+    public Sprite _theGoodPlayerSprite;
+    public Sprite _theBadPlayerSprite;
 
     public Rigidbody2D getPlayerRB
     {
@@ -58,22 +59,43 @@ public class PlayerController : MonoBehaviour {
         _playerRB = GetComponent<Rigidbody2D>();
         _playerAnim = GetComponent<Animator>();
 
-        _playerMovement = PlayerMovement.getInstance();
+        LoadPlayerSide();
+        RenderPlayerSprite();
+    }
 
-        //Load dynamically the Sprites
+    private void LoadPlayerSide() {
+        if (_playerAnim.GetBool("MachineSide"))
+        {
+            _maxSpeed = 2;
+            _life = 100;
+            _playerJumpForce = 3;
+            _isDoubleJumpAble = true;
+        }
+        else
+        {
+            _maxSpeed = 1.5f;
+            _life = 100;
+            _playerJumpForce = 3;
+            _isDoubleJumpAble = false;
+        }
+    }
+
+    private void RenderPlayerSprite() {
         SpriteRenderer _playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
-        _playerTheGoodSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
-        _playerTheBadSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
-        Debug.Log(_playerTheBadSprites.Length);
+        //_playerTheGoodSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
+        //_playerTheBadSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
+        if (_playerSpriteRenderer.sprite != null)
+            return;
+
         if (_playerAnim.GetBool("MachineSide"))
-            _playerSpriteRenderer.sprite = _playerTheBadSprites[0];
-        else _playerSpriteRenderer.sprite = _playerTheGoodSprites[0];
+            _playerSpriteRenderer.sprite = _theBadPlayerSprite;
+        else _playerSpriteRenderer.sprite = _theGoodPlayerSprite;
     }
 
     private void Update()
     {
-     
+        RenderPlayerSprite();
     }
 
     // FixedUpdate is more acurate than Update 
@@ -87,10 +109,10 @@ public class PlayerController : MonoBehaviour {
 
     private void movePlayer()
     {
-        float hMove = _playerMovement.horizontalMove;
-        float vMove = _playerMovement.verticalMove;
+        float hMove = Input.GetAxis("Horizontal");
+        float vMove = Input.GetAxis("Vertical");
         if (!_playerJump)
-            _playerJump = _playerMovement.wannaJump;
+            _playerJump = CrossPlatformInputManager.GetButtonDown("Jump");
 
         if (_isBlock)
         {
@@ -117,10 +139,10 @@ public class PlayerController : MonoBehaviour {
             if (!_canMoveFreely)
             {
                 if (Mathf.Abs(hMove) == 0)
-                    hMove = _playerMovement.verticalMove;
+                    hMove = vMove;
                 hMove = Mathf.Abs(hMove);
             }
-            else handleJump((hMove != 0 && vMove != 0));
+            else handleJump(hMove != 0);
 
             _playerRB.velocity = new Vector2(hMove * _maxSpeed, _playerRB.velocity.y);
             _playerAnim.SetFloat("speed", Mathf.Abs(hMove));
