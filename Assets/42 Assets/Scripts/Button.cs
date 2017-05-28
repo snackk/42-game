@@ -11,7 +11,7 @@ public class Button : MonoBehaviour, IInteractable
     [SerializeField]
     private int _timesBeforeLightsOff = 2;
 
-    private GameObject screen;
+    private GameObject screen, cornerDisplay;
     private Renderer screenRenderer, officeON, deskOfficeON, deskOfficeOFF, officeOFF;
 
     private int timesCalled = 0;
@@ -38,6 +38,8 @@ public class Button : MonoBehaviour, IInteractable
         deskOfficeON = GameObject.Find("Office_ON/Office_ON_Desk").GetComponent<Renderer>();
         deskOfficeOFF = GameObject.Find("Office_OFF").GetComponent<Renderer>();
         officeOFF = GameObject.Find("Office_OFF/Office_off_desk").GetComponent<Renderer>();
+
+		cornerDisplay = GameObject.Find ("cornerdisplayBG");
     }
 
     // Update is called once per frame
@@ -72,7 +74,7 @@ public class Button : MonoBehaviour, IInteractable
         if (timesCalled == 0)
         {
 
-			GameObject.Find("cornerdisplayBG").GetComponent<CornerDisplayHandler>().Connection = 2;
+			cornerDisplay.GetComponent<CornerDisplayHandler>().Connection = 2;
             screenRenderer.enabled = true;
             if (other.gameObject.name.Equals("Player"))
             {
@@ -94,6 +96,8 @@ public class Button : MonoBehaviour, IInteractable
 				SwitchLights(true);
 			}));
 			oThread.Start ();*/
+
+			cornerDisplay.GetComponent<CornerDisplayHandler>().Connection = 3;
         }
         isInteractable = false;
     }
@@ -104,6 +108,8 @@ public class Button : MonoBehaviour, IInteractable
         officeON.enabled = state;
         officeOFF.enabled = !state;
         deskOfficeOFF.enabled = !state;
+
+		cornerDisplay.GetComponent<CornerDisplayHandler>().disable();
     }
 
     public int Interact()
