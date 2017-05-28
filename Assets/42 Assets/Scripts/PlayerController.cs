@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
     private int _amountJump = 0;
 
     //Layers to check collisions
-    private const float _groundedRadius = .02f;
+    private const float _groundedRadius = .05f;
 
     public LayerMask _whatIsGround;
     public LayerMask _whatIsInteractable;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     private Animator _playerAnim;
 
     //Interactions
-    private List<IInteractable> _interactables = new List<IInteractable>();
+    private IInteractable _interactable = null;
 
     //Sprited to be loaded on runtime
     public Sprite _theGoodPlayerSprite;
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour {
     {
         float hMove = Input.GetAxis("Horizontal");
         float vMove = Input.GetAxis("Vertical");
-        if (!_playerJump)
+        if (!_playerJump && !_isBlock)
             _playerJump = CrossPlatformInputManager.GetButtonDown("Jump");
 
         if (_isBlock)
@@ -121,17 +121,14 @@ public class PlayerController : MonoBehaviour {
             _playerAnim.SetFloat("speed", 0);
         }
 
-        if (_interactables.Count > 0)
+        if (_interactable != null  && _playerAnim.GetFloat("speed") == 0)
         {
-            if (hMove != 0 || vMove != 0 || _playerJump)
-            {
+            if (Input.GetKey(KeyCode.E)) {
                 int result = 0;
-                foreach (IInteractable i in _interactables)
-                {
-                    result = i.Interact();
-                }
+                result = _interactable.Interact();
+
                 if (result == 1)
-                    _interactables = new List<IInteractable>();
+                    _interactable = null;
             }
         }
         else
@@ -209,14 +206,15 @@ public class PlayerController : MonoBehaviour {
 
     private void checkForInteraction()
     {
-        if (_interactables.Count == 0 && _isBlock)
+        if (_interactable == null && _isBlock)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i].gameObject.CompareTag("Interactable"))
                 {
-                    _interactables.Add(colliders[i].GetComponent<IInteractable>());
+                    _interactable = colliders[i].GetComponent<IInteractable>();
+                    break;
                 }
             }
         }
