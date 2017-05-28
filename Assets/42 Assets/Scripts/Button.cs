@@ -71,6 +71,8 @@ public class Button : MonoBehaviour, IInteractable
         Debug.Log("Object entered");
         if (timesCalled == 0)
         {
+
+			GameObject.Find("cornerdisplayBG").GetComponent<CornerDisplayHandler>().Connection = 2;
             screenRenderer.enabled = true;
             if (other.gameObject.name.Equals("Player"))
             {
