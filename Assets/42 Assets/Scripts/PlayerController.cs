@@ -6,9 +6,13 @@ public class PlayerController : MonoBehaviour {
     
     //Player state variables (Depends on the player side)
     private float _maxSpeed;
+    private float _accel;
+    private float _daccel;
     private float _life;
     private float _playerJumpForce;
     private bool _isDoubleJumpAble;
+
+    private float _actualSpeed = 0;
 
     //Changes from scene to scene
     public bool _canMoveFreely = false;
@@ -66,14 +70,18 @@ public class PlayerController : MonoBehaviour {
     private void LoadPlayerSide() {
         if (_playerAnim.GetBool("MachineSide"))
         {
-            _maxSpeed = 2;
+            _maxSpeed = 2.5f;
+            _accel = 6.0f;
+            _daccel = 6.0f;
             _life = 100;
             _playerJumpForce = 3;
             _isDoubleJumpAble = true;
         }
         else
         {
-            _maxSpeed = 1.5f;
+            _maxSpeed = 2.5f;
+            _accel = 4.0f;
+            _daccel = 3.5f;
             _life = 100;
             _playerJumpForce = 3;
             _isDoubleJumpAble = false;
@@ -96,23 +104,29 @@ public class PlayerController : MonoBehaviour {
     private void Update()
     {
         RenderPlayerSprite();
+
+        checkGroundColision();
+        checkInteraction();
+
+        if (!_playerJump && !_isBlock)
+            _playerJump = CrossPlatformInputManager.GetButtonDown("Jump");
     }
 
     // FixedUpdate is more acurate than Update 
     void FixedUpdate ()
     {
-        checkGroundColision();
-        checkForInteraction();
-        
-        movePlayer();
+        handlePlayer();
     }
 
-    private void movePlayer()
-    {
-        float hMove = Input.GetAxis("Horizontal");
-        float vMove = Input.GetAxis("Vertical");
-        if (!_playerJump && !_isBlock)
-            _playerJump = CrossPlatformInputManager.GetButtonDown("Jump");
+    private void handlePlayer() {
+        if (_isBlock || !_canMoveFreely)
+            handlePlayerNonFreely();
+        else playerMoveFreely();
+
+        handlePlayerInteraction();
+    }
+
+    private void handlePlayerNonFreely() {
 
         if (_isBlock)
         {
@@ -121,33 +135,74 @@ public class PlayerController : MonoBehaviour {
             _playerAnim.SetFloat("speed", 0);
         }
 
-        if (_interactable != null  && _playerAnim.GetFloat("speed") == 0)
+        if (!_canMoveFreely && !_isBlock)
         {
-            if (Input.GetKey(KeyCode.E)) {
+            if ((Input.GetKey(KeyCode.A) || 
+                Input.GetKey(KeyCode.W) || 
+                Input.GetKey(KeyCode.S) || 
+                Input.GetKey(KeyCode.D) || 
+                Input.GetKey(KeyCode.Space)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
+                    _actualSpeed += _accel * Time.deltaTime;
+                else
+                {
+                    if (_actualSpeed > _daccel * Time.deltaTime)
+                        _actualSpeed = _actualSpeed - _daccel * Time.deltaTime;
+                    else if (_actualSpeed < -_daccel * Time.deltaTime)
+                        _actualSpeed = _actualSpeed + _daccel * Time.deltaTime;
+                    else _actualSpeed = 0;
+                }
+
+                _playerRB.velocity = new Vector2(_actualSpeed, _playerRB.velocity.y);
+                _playerAnim.SetFloat("speed", Mathf.Abs(_actualSpeed));
+
+                if (_actualSpeed > 0 && !_playerFaceRight)
+                    flipSide();
+                else if (_actualSpeed < 0 && _playerFaceRight)
+                    flipSide();
+        }
+    }
+
+    private void playerMoveFreely() {
+
+        if ((Input.GetKey(KeyCode.A)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
+            _actualSpeed -= _accel * Time.deltaTime;
+        else if ((Input.GetKey(KeyCode.D)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
+            _actualSpeed += _accel * Time.deltaTime;
+        else {
+            if (_actualSpeed > _daccel * Time.deltaTime)
+                _actualSpeed = _actualSpeed - _daccel * Time.deltaTime;
+            else if (_actualSpeed < -_daccel * Time.deltaTime)
+                _actualSpeed = _actualSpeed + _daccel * Time.deltaTime;
+            else _actualSpeed = 0;
+        }
+
+        _playerRB.velocity = new Vector2(_actualSpeed, _playerRB.velocity.y);
+        _playerAnim.SetFloat("speed", Mathf.Abs(_actualSpeed));
+
+        if (_actualSpeed > 0 && !_playerFaceRight)
+            flipSide();
+        else if (_actualSpeed < 0 && _playerFaceRight)
+            flipSide();
+
+        handleJump(_actualSpeed != 0);
+    }
+
+    private void handlePlayerInteraction() {
+        if (_interactable != null && _playerAnim.GetFloat("speed") == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.A) ||
+                Input.GetKeyDown(KeyCode.W) ||
+                Input.GetKeyDown(KeyCode.S) ||
+                Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.Space) ||
+                Input.GetKeyDown(KeyCode.E))
+            {      
                 int result = 0;
                 result = _interactable.Interact();
 
                 if (result == 1)
                     _interactable = null;
             }
-        }
-        else
-        {
-            if (!_canMoveFreely)
-            {
-                if (Mathf.Abs(hMove) == 0)
-                    hMove = vMove;
-                hMove = Mathf.Abs(hMove);
-            }
-            else handleJump(hMove != 0);
-
-            _playerRB.velocity = new Vector2(hMove * _maxSpeed, _playerRB.velocity.y);
-            _playerAnim.SetFloat("speed", Mathf.Abs(hMove));
-
-            if (hMove > 0 && !_playerFaceRight)
-                flipSide();
-            else if (hMove < 0 && _playerFaceRight)
-                flipSide();
         }
     }
 
@@ -191,7 +246,6 @@ public class PlayerController : MonoBehaviour {
 
     private void checkGroundColision()
     {
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -204,7 +258,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void checkForInteraction()
+    private void checkInteraction()
     {
         if (_interactable == null && _isBlock)
         {
