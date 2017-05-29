@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour {
     private float _playerJumpForce;
     private bool _isDoubleJumpAble;
 
-    private float _actualSpeed = 0;
+    private float _hActualSpeed = 0;
+    private float _vActualSpeed = 0;
 
     //Changes from scene to scene
+    public string _whatScene;
     public bool _canMoveFreely = false;
     public bool _isBlock = false;   //To interact with player YOU MUST BLOCK HIM!
     
@@ -115,95 +117,68 @@ public class PlayerController : MonoBehaviour {
     // FixedUpdate is more acurate than Update 
     void FixedUpdate ()
     {
-        handlePlayer();
-    }
-
-    private void handlePlayer() {
-        if (_isBlock || !_canMoveFreely)
-            handlePlayerNonFreely();
-        else playerMoveFreely();
-
-        handlePlayerInteraction();
-    }
-
-    private void handlePlayerNonFreely() {
-
-        if (_isBlock)
+        switch (_whatScene.ToLower())
         {
-            if (_playerFaceRight)
-                flipSide();
-            _playerAnim.SetFloat("speed", 0);
-        }
+            case "initial":
+                if (_isBlock || !_canMoveFreely)
+                    handlePlayerNonFreely();
+                else playerMoveFreely();
 
-        if (!_canMoveFreely && !_isBlock)
-        {
-            if ((Input.GetKey(KeyCode.A) || 
-                Input.GetKey(KeyCode.W) || 
-                Input.GetKey(KeyCode.S) || 
-                Input.GetKey(KeyCode.D) || 
-                Input.GetKey(KeyCode.Space)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
-                    _actualSpeed += _accel * Time.deltaTime;
-                else
-                {
-                    if (_actualSpeed > _daccel * Time.deltaTime)
-                        _actualSpeed = _actualSpeed - _daccel * Time.deltaTime;
-                    else if (_actualSpeed < -_daccel * Time.deltaTime)
-                        _actualSpeed = _actualSpeed + _daccel * Time.deltaTime;
-                    else _actualSpeed = 0;
-                }
+                handlePlayerNonFreelyInteraction();
+                break;
 
-                _playerRB.velocity = new Vector2(_actualSpeed, _playerRB.velocity.y);
-                _playerAnim.SetFloat("speed", Mathf.Abs(_actualSpeed));
-
-                if (_actualSpeed > 0 && !_playerFaceRight)
-                    flipSide();
-                else if (_actualSpeed < 0 && _playerFaceRight)
-                    flipSide();
+            default:
+                playerMoveFreely();
+                break;
         }
     }
 
     private void playerMoveFreely() {
 
-        if ((Input.GetKey(KeyCode.A)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
-            _actualSpeed -= _accel * Time.deltaTime;
-        else if ((Input.GetKey(KeyCode.D)) && (Mathf.Abs(_actualSpeed) < _maxSpeed))
-            _actualSpeed += _accel * Time.deltaTime;
-        else {
-            if (_actualSpeed > _daccel * Time.deltaTime)
-                _actualSpeed = _actualSpeed - _daccel * Time.deltaTime;
-            else if (_actualSpeed < -_daccel * Time.deltaTime)
-                _actualSpeed = _actualSpeed + _daccel * Time.deltaTime;
-            else _actualSpeed = 0;
+        if (Input.GetKey(KeyCode.E) && _interactable != null) {
+            int result = 0;
+            result = _interactable.Interact();
+
+            if (result == 1)
+                _interactable = null;
         }
 
-        _playerRB.velocity = new Vector2(_actualSpeed, _playerRB.velocity.y);
-        _playerAnim.SetFloat("speed", Mathf.Abs(_actualSpeed));
-
-        if (_actualSpeed > 0 && !_playerFaceRight)
-            flipSide();
-        else if (_actualSpeed < 0 && _playerFaceRight)
-            flipSide();
-
-        handleJump(_actualSpeed != 0);
-    }
-
-    private void handlePlayerInteraction() {
-        if (_interactable != null && _playerAnim.GetFloat("speed") == 0)
+        if ((Input.GetKey(KeyCode.A)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
+            _hActualSpeed -= _accel * Time.deltaTime;
+        else if ((Input.GetKey(KeyCode.D)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
+            _hActualSpeed += _accel * Time.deltaTime;
+        else if ((Input.GetKey(KeyCode.S)) && (Mathf.Abs(_vActualSpeed) < _maxSpeed) && _interactable != null)
+            _vActualSpeed -= _accel * Time.deltaTime;
+        else if ((Input.GetKey(KeyCode.W)) && (Mathf.Abs(_vActualSpeed) < _maxSpeed) && _interactable != null)
+            _vActualSpeed += _accel * Time.deltaTime;
+        else
         {
-            if (Input.GetKeyDown(KeyCode.A) ||
-                Input.GetKeyDown(KeyCode.W) ||
-                Input.GetKeyDown(KeyCode.S) ||
-                Input.GetKeyDown(KeyCode.D) ||
-                Input.GetKeyDown(KeyCode.Space) ||
-                Input.GetKeyDown(KeyCode.E))
-            {      
-                int result = 0;
-                result = _interactable.Interact();
+            if (_hActualSpeed > _daccel * Time.deltaTime)
+                _hActualSpeed = _hActualSpeed - _daccel * Time.deltaTime;
+            else if (_hActualSpeed < -_daccel * Time.deltaTime)
+                _hActualSpeed = _hActualSpeed + _daccel * Time.deltaTime;
+            else _hActualSpeed = 0;
 
-                if (result == 1)
-                    _interactable = null;
-            }
+            if (_vActualSpeed > _daccel * Time.deltaTime)
+                _vActualSpeed = _vActualSpeed - _daccel * Time.deltaTime;
+            else if (_vActualSpeed < -_daccel * Time.deltaTime)
+                _vActualSpeed = _vActualSpeed + _daccel * Time.deltaTime;
+            else _vActualSpeed = 0;
         }
+
+        if(_vActualSpeed != 0)
+            _playerRB.velocity = new Vector2(_hActualSpeed, _vActualSpeed);
+        else _playerRB.velocity = new Vector2(_hActualSpeed, _playerRB.velocity.y);
+
+        _playerAnim.SetFloat("speed", Mathf.Abs(_hActualSpeed));
+        _playerAnim.SetFloat("speedV", Mathf.Abs(_vActualSpeed));
+
+        if (_hActualSpeed > 0 && !_playerFaceRight)
+            flipSide();
+        else if (_hActualSpeed < 0 && _playerFaceRight)
+            flipSide();
+
+        handleJump(_hActualSpeed != 0);
     }
 
     private void handleJump(bool isMoving)
@@ -273,4 +248,68 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
+
+    //          I N I T I A L  S C E N E  O N L Y
+
+    private void handlePlayerNonFreely()
+    {
+
+        if (_isBlock)
+        {
+            if (_playerFaceRight)
+                flipSide();
+            _playerAnim.SetFloat("speed", 0);
+        }
+
+        if (!_canMoveFreely && !_isBlock)
+        {
+            if ((Input.GetKey(KeyCode.A) ||
+                Input.GetKey(KeyCode.W) ||
+                Input.GetKey(KeyCode.S) ||
+                Input.GetKey(KeyCode.D) ||
+                Input.GetKey(KeyCode.Space)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
+                _hActualSpeed += _accel * Time.deltaTime;
+            else
+            {
+                if (_hActualSpeed > _daccel * Time.deltaTime)
+                    _hActualSpeed = _hActualSpeed - _daccel * Time.deltaTime;
+                else if (_hActualSpeed < -_daccel * Time.deltaTime)
+                    _hActualSpeed = _hActualSpeed + _daccel * Time.deltaTime;
+                else _hActualSpeed = 0;
+            }
+
+            _playerRB.velocity = new Vector2(_hActualSpeed, _playerRB.velocity.y);
+            _playerAnim.SetFloat("speed", Mathf.Abs(_hActualSpeed));
+
+            if (_hActualSpeed > 0 && !_playerFaceRight)
+                flipSide();
+            else if (_hActualSpeed < 0 && _playerFaceRight)
+                flipSide();
+        }
+    }
+
+    private void handlePlayerNonFreelyInteraction()
+    {
+        if (_interactable != null && _playerAnim.GetFloat("speed") == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.A) ||
+                Input.GetKeyDown(KeyCode.W) ||
+                Input.GetKeyDown(KeyCode.S) ||
+                Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.Space) ||
+                Input.GetKeyDown(KeyCode.E))
+            {
+                int result = 0;
+                result = _interactable.Interact();
+
+                if (result == 1)
+                    _interactable = null;
+            }
+        }
+    }
+
+    //          E N D !
+
 }
+

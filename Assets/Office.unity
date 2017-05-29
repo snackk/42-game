@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 362425386}
   - component: {fileID: 362425385}
   - component: {fileID: 362425384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_forbidden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4983172330067982, guid: c0625bd1a44a17e45be3aaf4afced56a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.47
+      value: -7.76
       objectReference: {fileID: 0}
     - target: {fileID: 4983172330067982, guid: c0625bd1a44a17e45be3aaf4afced56a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -234,10 +234,25 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114698325818766336, guid: c0625bd1a44a17e45be3aaf4afced56a,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1782995201}
     - target: {fileID: 20893481214291220, guid: c0625bd1a44a17e45be3aaf4afced56a,
         type: 2}
       propertyPath: orthographic size
-      value: 2.7040243
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114698325818766336, guid: c0625bd1a44a17e45be3aaf4afced56a,
+        type: 2}
+      propertyPath: damping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114698325818766336, guid: c0625bd1a44a17e45be3aaf4afced56a,
+        type: 2}
+      propertyPath: lookAheadMoveThreshold
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0625bd1a44a17e45be3aaf4afced56a, type: 2}
@@ -252,7 +267,7 @@ GameObject:
   - component: {fileID: 632651026}
   - component: {fileID: 632651025}
   - component: {fileID: 632651024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_Double
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +354,7 @@ GameObject:
   - component: {fileID: 1172005261}
   - component: {fileID: 1172005260}
   - component: {fileID: 1172005259}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +444,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4338219050376196, guid: 436050e752c15244daf69b88649d8754, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.522
+      value: -0.529
       objectReference: {fileID: 0}
     - target: {fileID: 4338219050376196, guid: 436050e752c15244daf69b88649d8754, type: 2}
       propertyPath: m_LocalPosition.z
@@ -455,14 +470,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
-        type: 2}
-      propertyPath: _canMoveFreely
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436050e752c15244daf69b88649d8754, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1782995201 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4338219050376196, guid: 436050e752c15244daf69b88649d8754,
+    type: 2}
+  m_PrefabInternal: {fileID: 1782995200}
 --- !u!1 &2112073440
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +488,7 @@ GameObject:
   - component: {fileID: 2112073443}
   - component: {fileID: 2112073442}
   - component: {fileID: 2112073441}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Office_on_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
