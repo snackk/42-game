@@ -7,7 +7,7 @@ public class ExitSewer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (GameObject.Find ("BlockNPC").GetComponent<NpcRequiresItem> ().checkHasItem ()) {
-			SceneManager.LoadScene ("");
+			SceneManager.LoadScene ("OutdoorsRebel");
 		}
 	}
 

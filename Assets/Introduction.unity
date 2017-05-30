@@ -592,6 +592,16 @@ Prefab:
       propertyPath: _canMoveFreely
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: _whatScene
+      value: initial
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
+        type: 2}
+      propertyPath: isDoubleJumpAble
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436050e752c15244daf69b88649d8754, type: 2}
   m_IsPrefabParent: 0
@@ -679,7 +689,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: -0.44}
+  m_Offset: {x: 0.77171695, y: -0.44}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -690,7 +700,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 1.66}
+  m_Size: {x: 1.8434341, y: 1.66}
   m_EdgeRadius: 0
 --- !u!114 &1153392386
 MonoBehaviour:
@@ -703,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19562a0d1f2acb4d83bce3118e2d856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timesBeforeLightsOff: 3
+  _timesBeforeLightsOff: 4
 --- !u!4 &1407498166 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4983172330067982, guid: c0625bd1a44a17e45be3aaf4afced56a,
@@ -751,6 +761,19 @@ Prefab:
     - target: {fileID: 1623609822387398, guid: acbbc28e19498e0419b351e7b96f7804, type: 2}
       propertyPath: m_Name
       value: cornerdisplayBG
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759333491199554, guid: acbbc28e19498e0419b351e7b96f7804, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4759333491199554, guid: acbbc28e19498e0419b351e7b96f7804, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114982227534515566, guid: acbbc28e19498e0419b351e7b96f7804,
+        type: 2}
+      propertyPath: InitialConnection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acbbc28e19498e0419b351e7b96f7804, type: 2}
