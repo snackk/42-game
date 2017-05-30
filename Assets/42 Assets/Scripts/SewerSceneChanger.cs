@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SewerSceneChanger : MonoBehaviour, IInteractable {
 
@@ -11,7 +12,9 @@ public class SewerSceneChanger : MonoBehaviour, IInteractable {
 
 	public int Interact(){
 		var cornerDisplay = GameObject.Find ("CornerDisplay");
-		cornerDisplay.GetComponent<CornerDisplayHandler>().TurnScreenRed();
+		if (cornerDisplay.GetComponent<CornerDisplayHandler> ().TurnScreenRed ()) {
+			SceneManager.LoadScene ("Sewers");
+		}
 		return 0;
 	}
 	

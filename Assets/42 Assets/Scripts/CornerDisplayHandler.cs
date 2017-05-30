@@ -41,10 +41,11 @@ public class CornerDisplayHandler : MonoBehaviour {
 	public bool TurnScreenRed(){
 		if (_displayRed.material.color.a != 1) {
 			Color col = _displayRed.material.color;
-			col.a += 0.1f;
+			col.a += 0.2f;
 			_displayRed.material.color = col;
-		}
-		return _displayRed.material.color.a == 1;
+			return false;
+		} else
+			return true;
 	}
 
 	private int _connection;
