@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887806948476498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.323, y: -0.529, z: -1}
+  m_LocalPosition: {x: -2.442, y: -0.532, z: 0}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.5}
   m_Children:
   - {fileID: 4621496136759500}
@@ -200,9 +200,9 @@ MonoBehaviour:
   _whatIsInteractable:
     serializedVersion: 2
     m_Bits: 512
-  _theGoodPlayerSprite: {fileID: 21300002, guid: 624d2bbc579119d4e856e9c493a577a2,
+  _theGoodPlayerSprite: {fileID: 21300002, guid: d81a6537144cc2d4cbdc0b66fae1869d,
     type: 3}
-  _theBadPlayerSprite: {fileID: 21300036, guid: d40c191aa46654db7a426d6a1fa3aa30,
+  _theBadPlayerSprite: {fileID: 21300002, guid: ac6ae7e6202c8784c8c7476a0652af97,
     type: 3}
 --- !u!212 &212397953069536066
 SpriteRenderer:
