@@ -40,12 +40,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D _playerRB;
     private Animator _playerAnim;
 
-    //Interactions
-    private IInteractable _interactable = null;
-
     //Sprited to be loaded on runtime
-    public Sprite _theGoodPlayerSprite;
-    public Sprite _theBadPlayerSprite;
+    public Sprite _theGoodPlayerSprite = null;
+    public Sprite _theBadPlayerSprite = null;
 
     public Rigidbody2D getPlayerRB
     {
@@ -66,7 +63,7 @@ public class PlayerController : MonoBehaviour {
         _playerAnim = GetComponent<Animator>();
 
         LoadPlayerSide();
-        RenderPlayerSprite();
+        //RenderPlayerSprite();
     }
 
     private void LoadPlayerSide() {
@@ -91,10 +88,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void RenderPlayerSprite() {
-        SpriteRenderer _playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer _playerSpriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
-        //_playerTheGoodSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
-        //_playerTheBadSprites = Resources.LoadAll<Sprite>(@"TheGoodPlayer/");
         if (_playerSpriteRenderer.sprite != null)
             return;
 
@@ -108,7 +103,7 @@ public class PlayerController : MonoBehaviour {
         RenderPlayerSprite();
 
         checkGroundColision();
-        checkInteraction();
+        //checkInteraction();
 
         if (!_playerJump && !_isBlock)
             _playerJump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -135,22 +130,22 @@ public class PlayerController : MonoBehaviour {
 
     private void playerMoveFreely() {
 
-        if (Input.GetKey(KeyCode.E) && _interactable != null) {
-            int result = 0;
-            result = _interactable.Interact();
-
-            if (result == 1)
-                _interactable = null;
+        if (Input.GetKey(KeyCode.E)) {
+            var aux = checkInteraction();
+            if (aux != null)
+            {
+                aux.Interact();
+            }
         }
 
         if ((Input.GetKey(KeyCode.A)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
             _hActualSpeed -= _accel * Time.deltaTime;
         else if ((Input.GetKey(KeyCode.D)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
             _hActualSpeed += _accel * Time.deltaTime;
-        else if ((Input.GetKey(KeyCode.S)) && (Mathf.Abs(_vActualSpeed) < _maxSpeed) && _interactable != null)
+        /*else if ((Input.GetKey(KeyCode.S)) && (Mathf.Abs(_vActualSpeed) < _maxSpeed) && _interactable != null)
             _vActualSpeed -= _accel * Time.deltaTime;
         else if ((Input.GetKey(KeyCode.W)) && (Mathf.Abs(_vActualSpeed) < _maxSpeed) && _interactable != null)
-            _vActualSpeed += _accel * Time.deltaTime;
+            _vActualSpeed += _accel * Time.deltaTime;*/
         else
         {
             if (_hActualSpeed > _daccel * Time.deltaTime)
@@ -233,20 +228,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void checkInteraction()
+    private IInteractable checkInteraction()
     {
-        if (_interactable == null && _isBlock)
+        IInteractable toRet = null;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
+        for (int i = 0; i < colliders.Length; i++)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
-            for (int i = 0; i < colliders.Length; i++)
+            if (colliders[i].gameObject.CompareTag("Interactable"))
             {
-                if (colliders[i].gameObject.CompareTag("Interactable"))
-                {
-                    _interactable = colliders[i].GetComponent<IInteractable>();
-                    break;
-                }
+                toRet = colliders[i].GetComponent<IInteractable>();
+                break;
             }
         }
+        return toRet;
+        
     }
 
 
@@ -291,7 +286,7 @@ public class PlayerController : MonoBehaviour {
 
     private void handlePlayerNonFreelyInteraction()
     {
-        if (_interactable != null && _playerAnim.GetFloat("speed") == 0)
+        if (_playerAnim.GetFloat("speed") == 0)
         {
             if (Input.GetKeyDown(KeyCode.A) ||
                 Input.GetKeyDown(KeyCode.W) ||
@@ -300,11 +295,10 @@ public class PlayerController : MonoBehaviour {
                 Input.GetKeyDown(KeyCode.Space) ||
                 Input.GetKeyDown(KeyCode.E))
             {
-                int result = 0;
-                result = _interactable.Interact();
-
-                if (result == 1)
-                    _interactable = null;
+                var aux = checkInteraction();
+                if (aux != null) {
+                    aux.Interact();
+                }
             }
         }
     }

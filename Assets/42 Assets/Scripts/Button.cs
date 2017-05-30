@@ -70,7 +70,7 @@ public class Button : MonoBehaviour, IInteractable
         lock (lockIsInteractable)
             isInteractable = timesCalled < _timesBeforeLightsOff;
 
-        Debug.Log("Object entered");
+        //Debug.Log("Object entered");
         if (timesCalled == 0)
         {
 
@@ -85,7 +85,7 @@ public class Button : MonoBehaviour, IInteractable
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("Object Left");
+        //Debug.Log("Object Left");
         if (!lightsState)
         {
             lightsState = true;
@@ -136,7 +136,7 @@ public class Button : MonoBehaviour, IInteractable
                 }
                 else
                 {
-                    Debug.Log(timesCalled);
+                    //Debug.Log(timesCalled);
                     screenRenderer.enabled = false;
 
                     Thread oThread = new Thread(new ThreadStart(() => {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b16a012de5436e241a68c44015c85e88
-timeCreated: 1495749771
+guid: ac6ae7e6202c8784c8c7476a0652af97
+timeCreated: 1496103657
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -20,7 +20,6 @@ TextureImporter:
     21300026: TheBadPlayer_13
     21300028: TheBadPlayer_14
     21300030: TheBadPlayer_15
-    21300032: TheBadPlayer_16
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -44,7 +43,7 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapMode: 1
@@ -91,7 +90,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -104,7 +103,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -117,7 +116,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -130,7 +129,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -143,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -156,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -169,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -182,7 +181,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -195,7 +194,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 948
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -208,7 +207,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1185
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -221,7 +220,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -234,7 +233,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -247,7 +246,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -260,7 +259,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -273,7 +272,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 948
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -286,7 +285,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1185
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0

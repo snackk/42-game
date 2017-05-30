@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 86b29bfec379d9f42907335a08afe51a
-timeCreated: 1495749800
+guid: d81a6537144cc2d4cbdc0b66fae1869d
+timeCreated: 1496103631
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -20,6 +20,12 @@ TextureImporter:
     21300026: TheGoodPlayer_13
     21300028: TheGoodPlayer_14
     21300030: TheGoodPlayer_15
+    21300032: TheGoodPlayer_16
+    21300034: TheGoodPlayer_17
+    21300036: TheGoodPlayer_18
+    21300038: TheGoodPlayer_19
+    21300040: TheGoodPlayer_20
+    21300042: TheGoodPlayer_21
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -43,7 +49,7 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapMode: 1
@@ -90,7 +96,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -103,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -116,7 +122,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -129,7 +135,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 512
+        y: 1024
         width: 237
         height: 256
       alignment: 0
@@ -142,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -155,7 +161,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -168,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -181,7 +187,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -194,7 +200,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 948
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -207,7 +213,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1185
-        y: 256
+        y: 768
         width: 237
         height: 256
       alignment: 0
@@ -220,7 +226,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -233,7 +239,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -246,7 +252,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 474
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -259,7 +265,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 711
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -272,7 +278,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 948
-        y: 0
+        y: 512
         width: 237
         height: 256
       alignment: 0
@@ -285,6 +291,84 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1185
+        y: 512
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_17
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 256
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_18
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 256
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_19
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 256
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 237
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TheGoodPlayer_21
+      rect:
+        serializedVersion: 2
+        x: 237
         y: 0
         width: 237
         height: 256
