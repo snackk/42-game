@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08edc4b5b0438f4d86e639add4b7bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Rooftop
+  scene: Outdoors
 --- !u!1001 &1782995200
 Prefab:
   m_ObjectHideFlags: 0

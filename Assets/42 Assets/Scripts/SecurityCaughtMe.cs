@@ -10,7 +10,6 @@ public class SecurityCaughtMe : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        _player = GameObject.Find("Player").GetComponent<Transform>();
     }
 	
 	// Update is called once per frame
@@ -19,10 +18,10 @@ public class SecurityCaughtMe : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, _player.position, Time.deltaTime);
     }
 
+
     void OnTriggerEnter2D(Collider2D other)
     {
         entered = true;
-        //transform.position = Vector3.Lerp(transform.position, _player.position, Time.deltaTime);
     }
 
     void OnTriggerExit2D(Collider2D other)
