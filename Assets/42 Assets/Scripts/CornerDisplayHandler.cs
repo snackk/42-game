@@ -49,15 +49,15 @@ public class CornerDisplayHandler : MonoBehaviour {
 
 	private int _connection;
 
-	private Vector3 A = new Vector3(-0.181f, 0.131f, -3.1f);
-	private Vector3 S = new Vector3(-0.063f, 0.131f, -3.1f);
-	private Vector3 W = new Vector3(-0.063f, 0.247f, -3.1f);
-	private Vector3 D = new Vector3(0.062f, 0.131f, -3.1f);
-	private Vector3 E = new Vector3(0.291f, 0.247f, -3.1f);
-	private Vector3 SPACE = new Vector3(0.361f, 0.131f, -3.1f);
+	private Vector3 A = new Vector3(-0.181f, 0.131f, -0.1f);
+	private Vector3 S = new Vector3(-0.063f, 0.131f, -0.1f);
+	private Vector3 W = new Vector3(-0.063f, 0.247f, -0.1f);
+	private Vector3 D = new Vector3(0.062f, 0.131f, -0.1f);
+	private Vector3 E = new Vector3(0.291f, 0.247f, -0.1f);
+	private Vector3 SPACE = new Vector3(0.361f, 0.131f, -0.1f);
 
-	private Vector3 B_E = new Vector3(0.291f, -0.124f, -3.1f);
-	private Vector3 B_D = new Vector3(0.062f, -0.245f, -3.1f);
+	private Vector3 B_E = new Vector3(0.291f, -0.124f, -0.1f);
+	private Vector3 B_D = new Vector3(0.062f, -0.245f, -0.1f);
 
 	private bool isPressedKeyGlowing { get { return _glowRenderer.enabled; } set { _glowRenderer.enabled = value; _glowRendererBad.enabled = showBad?value:false; } }
 	private bool isPressedSpaceGlowing { get { return _glowRendererSpacebar.enabled; } set { _glowRendererSpacebar.enabled = value; _glowRendererBad.enabled = showBad?value:false; } }
@@ -106,7 +106,6 @@ public class CornerDisplayHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (_self.enabled || _connectionsBroken.enabled) {
-			print (_connectionsBroken.enabled);
 			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.LeftArrow)) {
 				SetGlowOnPosition (_glow, A);
 				isPressedKeyGlowing = true;
