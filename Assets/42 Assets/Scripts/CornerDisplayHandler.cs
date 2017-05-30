@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CornerDisplayHandler : MonoBehaviour {
+	public int InitialConnection;
+
 	Renderer _connections1;
 	Renderer _connections2;
 	Renderer _connectionsBroken;
@@ -13,6 +15,7 @@ public class CornerDisplayHandler : MonoBehaviour {
 	Renderer _glowRenderer;
 	Renderer _glowRendererBad;
 	Renderer _glowRendererSpacebar;
+	Renderer _displayRed;
 
 	bool showBad = true;
 
@@ -33,6 +36,15 @@ public class CornerDisplayHandler : MonoBehaviour {
 			}
 			_connection = value;
 		}
+	}
+
+	public bool TurnScreenRed(){
+		if (_displayRed.material.color.a != 1) {
+			Color col = _displayRed.material.color;
+			col.a += 0.1f;
+			_displayRed.material.color = col;
+		}
+		return _displayRed.material.color.a == 1;
 	}
 
 	private int _connection;
@@ -75,11 +87,14 @@ public class CornerDisplayHandler : MonoBehaviour {
 				break;
 			case "cornerdisplaybroken":
 				_connectionsBroken = child.GetComponent<Renderer> ();
-				print (_connectionsBroken);
+				break;
+			case "displayred":
+				_displayRed = child.GetComponent<Renderer> ();
+				_displayRed.material.color = new Color (1.0f, 0f, 0f, 0f);
 				break;
 			}
 		}
-		Connection = 1;
+		Connection = InitialConnection;
 		isPressedKeyGlowing = false;
 	}
 
