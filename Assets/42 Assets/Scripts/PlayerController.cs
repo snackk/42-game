@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     private float _life;
     public float playerJumpForce;
     public bool isDoubleJumpAble;
+    public bool isMachineSide;
+
 
     private float _hActualSpeed = 0;
     private float _vActualSpeed = 0;
@@ -67,7 +69,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void LoadPlayerSide() {
-        if (_playerAnim.GetBool("MachineSide"))
+        _playerAnim.SetBool("MachineSide", isMachineSide);
+        if (isMachineSide)
         {
             _maxSpeed = 3f;
             _accel = 6.0f;
@@ -93,7 +96,7 @@ public class PlayerController : MonoBehaviour {
         if (_playerSpriteRenderer.sprite != null)
             return;
 
-        if (_playerAnim.GetBool("MachineSide"))
+        if (isMachineSide)
             _playerSpriteRenderer.sprite = _theBadPlayerSprite;
         else _playerSpriteRenderer.sprite = _theGoodPlayerSprite;
     }
