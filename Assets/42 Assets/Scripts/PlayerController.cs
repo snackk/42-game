@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     private float _accel;
     private float _daccel;
     private float _life;
-    private float _playerJumpForce;
+    public float playerJumpForce;
     public bool isDoubleJumpAble;
 
     private float _hActualSpeed = 0;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
             _accel = 6.0f;
             _daccel = 6.0f;
             _life = 100;
-            _playerJumpForce = 3;
+            playerJumpForce = 3;
             isDoubleJumpAble = true;
         }
         else
@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour {
             _accel = 4.0f;
             _daccel = 3.5f;
             _life = 100;
-            _playerJumpForce = 3;
-            isDoubleJumpAble = false;
+            //playerJumpForce = 3;
+            //isDoubleJumpAble = false;
         }
     }
 
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (_amountJump == 0)
             {
-                _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+                _playerRB.velocity = new Vector2(0f, playerJumpForce);
                 if(isMoving)
                     _playerAnim.SetBool("jump", true);
                 _isPlayerGrounded = false;
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (_amountJump == 1 && isDoubleJumpAble)
                 {
-                    _playerRB.velocity = new Vector2(0f, _playerJumpForce);
+                    _playerRB.velocity = new Vector2(0f, playerJumpForce);
                         if (isMoving)
                             _playerAnim.SetBool("jump", true);
                         _isPlayerGrounded = false;
