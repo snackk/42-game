@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     private float _daccel;
     private float _life;
     private float _playerJumpForce;
-    private bool _isDoubleJumpAble;
+    public bool isDoubleJumpAble;
 
     private float _hActualSpeed = 0;
     private float _vActualSpeed = 0;
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             _daccel = 6.0f;
             _life = 100;
             _playerJumpForce = 3;
-            _isDoubleJumpAble = true;
+            isDoubleJumpAble = true;
         }
         else
         {
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour {
             _daccel = 3.5f;
             _life = 100;
             _playerJumpForce = 3;
-            _isDoubleJumpAble = false;
+            isDoubleJumpAble = false;
         }
     }
 
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                if (_amountJump == 1 && _isDoubleJumpAble)
+                if (_amountJump == 1 && isDoubleJumpAble)
                 {
                     _playerRB.velocity = new Vector2(0f, _playerJumpForce);
                         if (isMoving)
