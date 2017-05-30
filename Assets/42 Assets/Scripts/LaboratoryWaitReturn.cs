@@ -5,21 +5,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LaboratoryWaitReturn : MonoBehaviour {
-
+    private Animator anim;
 	// Use this for initialization
 	void Start () {
-		Thread oThread = new Thread(new ThreadStart(() => {
-			Thread.Sleep(5000);
-
-			SceneManager.LoadScene ("Laboratory");
-		}));
-
-		// Start the thread
-		oThread.Start();
+        anim = GetComponent<Animator>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    void FixedUpdate()
+    {
+        var currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+
+        if (currentBaseState.IsName("End"))
+        {
+            SceneManager.LoadScene("Outside");
+        }
+    }
 }
