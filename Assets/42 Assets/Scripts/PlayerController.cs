@@ -118,8 +118,8 @@ public class PlayerController : MonoBehaviour {
                 if (_isBlock || !_canMoveFreely)
                     handlePlayerNonFreely();
                 else playerMoveFreely();
-
-                handlePlayerNonFreelyInteraction();
+                if(_isBlock)
+                    handlePlayerNonFreelyInteraction();
                 break;
 
             default:
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour {
     private IInteractable checkInteraction()
     {
         IInteractable toRet = null;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, _groundedRadius, _whatIsInteractable);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_playerGroundCheck.position, 0.5f, _whatIsInteractable);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject.CompareTag("Interactable"))
@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour {
                 Input.GetKey(KeyCode.W) ||
                 Input.GetKey(KeyCode.S) ||
                 Input.GetKey(KeyCode.D) ||
+                Input.GetKey(KeyCode.E) ||
                 Input.GetKey(KeyCode.Space)) && (Mathf.Abs(_hActualSpeed) < _maxSpeed))
                 _hActualSpeed += _accel * Time.deltaTime;
             else
