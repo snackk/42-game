@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
     private void LoadPlayerSide() {
         if (_playerAnim.GetBool("MachineSide"))
         {
-            _maxSpeed = 2.5f;
+            _maxSpeed = 3f;
             _accel = 6.0f;
             _daccel = 6.0f;
             _life = 100;
