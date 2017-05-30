@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Outdoors.unity
     guid: cd3669236ea5ed840bc0e36961e8819b
+  - enabled: 1
+    path: Assets/OutdoorsRebel.unity
+    guid: ea56c8627db7cf74b9ae39263ed7d9d0

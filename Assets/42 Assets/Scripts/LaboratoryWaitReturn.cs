@@ -17,7 +17,7 @@ public class LaboratoryWaitReturn : MonoBehaviour {
 
         if (currentBaseState.IsName("End"))
         {
-            SceneManager.LoadScene("Outside");
+            SceneManager.LoadScene("OutdoorsMachine");
         }
     }
 }
