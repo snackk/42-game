@@ -135,7 +135,7 @@ Transform:
   m_LocalScale: {x: 5.5093756, y: 3.099531, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &62206821
 BoxCollider2D:
@@ -442,7 +442,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.6499999, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &887328487
 MonoBehaviour:
@@ -586,22 +586,6 @@ Prefab:
     - target: {fileID: 4338219050376196, guid: 436050e752c15244daf69b88649d8754, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212397953069536066, guid: 436050e752c15244daf69b88649d8754,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300002, guid: d81a6537144cc2d4cbdc0b66fae1869d,
-        type: 3}
-    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
-        type: 2}
-      propertyPath: _canMoveFreely
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114693172167450328, guid: 436050e752c15244daf69b88649d8754,
-        type: 2}
-      propertyPath: _whatIsInteractable.m_Bits
-      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 436050e752c15244daf69b88649d8754, type: 2}
