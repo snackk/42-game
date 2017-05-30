@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 
     private void playerMoveFreely() {
 
-        if (Input.GetKey(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             var aux = checkInteraction();
             if (aux != null)
             {
